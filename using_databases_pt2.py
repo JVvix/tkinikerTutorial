@@ -22,10 +22,10 @@ c = conn.cursor()
 #        )""")
 
 def submit():
-    conn = sqlite3.connect('address_book_for_tutorial.db')
+    conn = sqlite3.connect('address_book.db')
     c = conn.cursor()
 
-    c.execute("INSERT INTO addressInformation VALUES (:f_name, :l_name, :address, :city, :state, :zipcode)", 
+    c.execute("INSERT INTO addresses VALUES (:f_name, :l_name, :address, :city, :state, :zipcode)", 
             {
                 'f_name': f_name.get(),
                 'l_name': l_name.get(),
@@ -48,10 +48,10 @@ def submit():
     zipcode.delete(0, END)
 
 def query():
-    conn = sqlite3.connect('address_book_for_tutorial.db')
+    conn = sqlite3.connect('address_book.db')
     c = conn.cursor()
 
-    c.execute("SELECT *,oid FROM addressInformation")
+    c.execute("SELECT *,oid FROM addresses")
     all_records = c.fetchall()
 
     print_records = ''
