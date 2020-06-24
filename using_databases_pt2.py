@@ -21,6 +21,17 @@ c = conn.cursor()
 #         zipcode integer
 #        )""")
 
+def delete():
+    conn = sqlite3.connect('address_book_for_tutorial.db')
+
+    c = conn.cursor()
+
+    c.execute("DELETE from addresses WHERE oid=PLACEHOLDER") 
+
+    conn.commit()
+
+    conn.close()
+
 def submit():
     conn = sqlite3.connect('address_book.db')
     c = conn.cursor()
@@ -57,7 +68,7 @@ def query():
     print_records = ''
 
     for record in all_records:
-        print_records += str(record[0]) + " " + str(record[1]) + "\n"
+        print_records += str(record[6]) + ".) " + str(record[0]) + " " + str(record[1])  +  "\t" + "\n"
 
     query_label = Label(root, text=print_records)
     query_label.grid(row=8, column=0, columnspan=2)
@@ -69,7 +80,7 @@ def query():
 # make text boxes
 
 f_name = Entry(root, width=30)
-f_name.grid(row=0, column=1, padx=20)
+f_name.grid(row=0, column=1, padx=20, pady=(10, 0))
 
 l_name = Entry(root, width=30)
 l_name.grid(row=1, column=1)
@@ -88,7 +99,7 @@ zipcode.grid(row=5, column=1)
 
 # Create Text Box Labels
 f_name_label = Label(root, text="First Name") 
-f_name_label.grid(row=0, column=0) 
+f_name_label.grid(row=0, column=0, pady=(10, 0)) 
 l_name_label = Label(root, text="Last Name") 
 l_name_label.grid(row=1, column=0)
 address_label = Label(root, text="Address") 
@@ -111,3 +122,4 @@ conn.commit()
 conn.close()
 
 root.mainloop()
+
